@@ -1,19 +1,32 @@
-function add(num1, num2) {
-    const sum = num1 + num2; 
-    return sum;
+function add(num1,num2) {
+    return num1 + num2; 
 }
 
-function subtract(num1, num2){
-    const difference = num1 - num2; 
-    return difference;
+function subtract(num1,num2){
+    return num1 - num2; 
 }
 
-function multiply(num1, num2){
-    const product = num1 * num2;
-    return product;
+function multiply(num1,num2){
+    return num1 * num2;
 }
 
-function divide(num1, num2){
-    const quotient = num1 / num2; 
-    return quotient; 
+function divide(num1,num2){
+    return num1 / num2;
+}
+
+
+function operate(num1, operator,num2){
+    switch (operator){
+        case '+': 
+        return add(num1,num2); 
+        case '-': 
+        return subtract(num1,num2);
+        case '*': 
+        return multiply(num1,num2);
+        case '/': 
+        return divide(num1,num2);
+        default: console.log("entered wrong thing");
+
+    }
+
 }
