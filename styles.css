@@ -1,0 +1,27 @@
+.container{
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px 100px;
+  grid-auto-rows: 100px;
+}
+
+.flexbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container > div{
+    border: 1px solid blue;
+    text-align: center;
+    font-size: 130%;
+    padding: 38px;
+}
+
+#input{
+    grid-column-start: 1;
+  grid-column-end: 6;
+
+}

@@ -30,3 +30,16 @@ function operate(num1, operator,num2){
     }
 
 }
+
+let buttons = document.querySelectorAll('.button'); 
+
+buttons.forEach(button=> {
+    button.addEventListener("click", populateDisplay)
+});
+
+let display = document.querySelector('#input');
+
+function populateDisplay(){
+    display.textContent += " " + this.textContent;
+
+}
