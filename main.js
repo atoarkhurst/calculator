@@ -21,25 +21,88 @@ function operate(num1, operator,num2){
         return add(num1,num2); 
         case '-': 
         return subtract(num1,num2);
-        case '*': 
+        case 'x': 
         return multiply(num1,num2);
-        case '/': 
+        case '÷': 
         return divide(num1,num2);
         default: console.log("entered wrong thing");
 
     }
 
 }
-
+let displayValue = ''; 
 let buttons = document.querySelectorAll('.button'); 
+let firstNum = 0; 
+let secondNum = 0; 
+let operator; 
+let result;
+let activeOperator = 0;  
+
 
 buttons.forEach(button=> {
-    button.addEventListener("click", populateDisplay)
+    button.addEventListener("click", populateDisplay);
+    
 });
 
 let display = document.querySelector('#input');
 
 function populateDisplay(){
-    display.textContent += " " + this.textContent;
+    let entry = this.textContent;
+     
 
+    if (entry === '+' || entry === '-' || entry === '÷' || entry === 'x' ){
+        if(firstNum != 0){
+            if(displayValue){
+                secondNum = parseInt(displayValue); 
+                result = operate(firstNum, operator, secondNum); 
+                result = round(result); 
+                display.textContent = result;
+                operator = entry; 
+                firstNum = result; 
+                displayValue = ''; 
+          }
+        } else{ 
+            firstNum = parseInt(displayValue);
+            displayValue = '';
+            operator = entry; 
+            display.textContent = operator;
+        }
+
+        
+        
+
+    }else if(entry === '='){
+        if(firstNum != 0 && operator && displayValue ){
+            secondNum = parseInt(displayValue); 
+            console.log(secondNum);
+            result = operate(firstNum, operator, secondNum); 
+            result = round(result); 
+            display.textContent = result; 
+        }else {
+            console.log('Please enter numbers and operators'); 
+        }
+    }else{
+        if(firstNum){
+            display.textContent = ''
+            display.textContent += entry; 
+        displayValue += entry;
+        } else{
+            display.textContent += entry; 
+        displayValue += entry;
+        }
+        
+
+    }
+   
+
+   
 }
+
+
+function round (num){
+    if(num % 1 != 0){
+        return num.toFixed(2)
+    }
+    return num; 
+}
+
