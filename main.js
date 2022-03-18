@@ -1,4 +1,6 @@
 function add(num1,num2) {
+    console.log(`first number:  ${num1}`)
+    console.log(`second number:  ${num2}`)
     return num1 + num2; 
 }
 
@@ -53,6 +55,7 @@ function populateDisplay(){
     if (entry === '+' || entry === '-' || entry === '÷' || entry === 'x' ){
         if(firstNum != 0){
             if(displayValue){
+                display.textContent = '';
                 secondNum = parseInt(displayValue); 
                 result = operate(firstNum, operator, secondNum); 
                 result = round(result); 
@@ -62,10 +65,14 @@ function populateDisplay(){
                 displayValue = ''; 
           }
         } else{ 
-            firstNum = parseInt(displayValue);
+            
+            if (displayValue.includes('.')){
+                firstNum = parseFloat(displayValue)
+            } else{
+                firstNum = parseInt(displayValue);
+            }
             displayValue = '';
             operator = entry; 
-            display.textContent = operator;
         }
 
         
@@ -73,17 +80,30 @@ function populateDisplay(){
 
     }else if(entry === '='){
         if(firstNum != 0 && operator && displayValue ){
-            secondNum = parseInt(displayValue); 
+            if (displayValue.includes('.')){
+                secondNum = parseFloat(displayValue)
+            } else{
+                secondNum = parseInt(displayValue);
+            }
             console.log(secondNum);
             result = operate(firstNum, operator, secondNum); 
+            console.log(result);
             result = round(result); 
+            console.log(result);
             display.textContent = result; 
         }else {
             console.log('Please enter numbers and operators'); 
         }
+    }else if (entry === 'AC') {
+        display.textContent = '';
+        firstNum = 0; 
+        secondNum = 0; 
+        displayValue = 0; 
+        
+        
     }else{
-        if(firstNum){
-            display.textContent = ''
+        if(firstNum && !displayValue){
+            display.textContent = '';
             display.textContent += entry; 
         displayValue += entry;
         } else{
@@ -101,7 +121,7 @@ function populateDisplay(){
 
 function round (num){
     if(num % 1 != 0){
-        return num.toFixed(2)
+        return num.toFixed(6) /1; 
     }
     return num; 
 }
