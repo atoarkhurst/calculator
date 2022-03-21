@@ -123,7 +123,7 @@ function populateDisplay(){
         displayValue = 0; 
         
         
-    } else if(entry === 'back'){
+    } else if(entry === 'delete'){
        let str = display.textContent;
        if(str != null){
            str = str.slice(0,-1); 
