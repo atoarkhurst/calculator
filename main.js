@@ -13,6 +13,7 @@ function multiply(num1,num2){
 }
 
 function divide(num1,num2){
+
     return num1 / num2;
 }
 
@@ -46,7 +47,7 @@ buttons.forEach(button=> {
     
 });
 
-let display = document.querySelector('#input');
+let display = document.querySelector('.screen');
 
 function populateDisplay(){
     let entry = this.textContent;
@@ -57,19 +58,28 @@ function populateDisplay(){
             if(displayValue){
                 display.textContent = '';
                 secondNum = parseInt(displayValue); 
-                result = operate(firstNum, operator, secondNum); 
+                if (secondNum === 0 && operator === '÷'){
+                    display.textContent = "nope";
+                    firstNum = 0; 
+                    secondNum = 0; 
+                 displayValue = 0; 
+                } else{
+                    result = operate(firstNum, operator, secondNum); 
                 result = round(result); 
                 display.textContent = result;
                 operator = entry; 
                 firstNum = result; 
                 displayValue = ''; 
+
+                }
+                
           }
         } else{ 
             
             if (displayValue.includes('.')){
                 firstNum = parseFloat(displayValue)
             } else{
-                firstNum = parseInt(displayValue);
+                firstNum = displayValue;
             }
             displayValue = '';
             operator = entry; 
@@ -85,20 +95,44 @@ function populateDisplay(){
             } else{
                 secondNum = parseInt(displayValue);
             }
-            console.log(secondNum);
+            if (secondNum === 0 && operator === '÷'){
+                display.textContent = "nope";
+                firstNum = 0; 
+                 secondNum = 0; 
+                displayValue = 0; 
+            } else {
+                console.log(secondNum);
+                firstNum = parseInt(firstNum);
+                secondNum = parseInt(secondNum);
             result = operate(firstNum, operator, secondNum); 
             console.log(result);
             result = round(result); 
             console.log(result);
             display.textContent = result; 
+
+
+            }
+            
         }else {
             console.log('Please enter numbers and operators'); 
         }
-    }else if (entry === 'AC') {
+    }else if (entry === 'clear') {
         display.textContent = '';
         firstNum = 0; 
         secondNum = 0; 
         displayValue = 0; 
+        
+        
+    } else if(entry === 'back'){
+       let str = display.textContent;
+       if(str != null){
+           str = str.slice(0,-1); 
+           display.textContent = str; 
+           displayValue = str; 
+           console.log(display.textContent);
+           console.log(displayValue);
+
+       }
         
         
     }else{
