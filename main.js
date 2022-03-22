@@ -58,6 +58,7 @@ function populateDisplay(){
             if(displayValue){
                 display.textContent = '';
                 secondNum = parseInt(displayValue); 
+                firstNum = parseInt(firstNum);
                 if (secondNum === 0 && operator === '÷'){
                     display.textContent = "nope";
                     firstNum = 0; 
